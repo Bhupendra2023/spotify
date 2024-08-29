@@ -2,7 +2,7 @@ import React from 'react';
 
 const SongItem = ({ song, onClick, isSelected, delay }) => (
     <li
-        className={`cursor-pointer  p-0 rounded-lg opacity-0 transition-all hover:scale-110 
+        className={`cursor-pointer  p-0 rounded-lg opacity-0 transition-all 
         duration-200 ease-in-out hover:bg-[rgba(255,255,255,0.04)] ${isSelected ? 'bg-[rgba(255,255,255,0.08)]' : ''} animate-staggered-slide-in`}
         onClick={onClick}
         style={{ animationDelay: `${delay}ms` }}  

@@ -33,6 +33,7 @@ const MusicPlayer = ({ setCurrentSong, currentSong, handleModal, handleBackward,
             setIsPlaying(false)
     };
 
+
     const handleSeek = (e) => {
         audioRef.current.currentTime = e.target.value;
         setCurrentTime(e.target.value);

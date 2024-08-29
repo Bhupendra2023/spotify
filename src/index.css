@@ -4,6 +4,7 @@
 
 body {
   background: linear-gradient(to right, #201606, #000000);
+  height: 100vh;
 }
 
 input[type="range"]::-webkit-slider-thumb {
