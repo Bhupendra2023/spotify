@@ -9,9 +9,7 @@ const SongAlbum = () => {
     const [isTopTrack, setIsTopTrack] = useState(false);
     const [currentSong, setCurrentSong] = useState({ song: {}, index: 0, willPlay: false });
     const [searchValue, setSearchValue] = useState('');
-    const [loading, setLoading] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [error, setError] = useState(null);
 
     const getSongDuration = useCallback((songUrl) => {
         return new Promise((resolve, reject) => {
@@ -49,9 +47,6 @@ const SongAlbum = () => {
                 setCurrentSong({ song: songsWithDuration[0], index: 0 });
             } catch (error) {
                 console.error('Error fetching songs:', error);
-                setError('Failed to fetch songs. Please try again.');
-            } finally {
-                setLoading(false);
             }
         };
 
@@ -89,23 +84,22 @@ const SongAlbum = () => {
         setIsModalOpen(isOpen);
     }, []);
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>{error}</div>;
 
     return (
-        <div className='w-full md:w-[90%]'>
+        <div className='w-full lg:w-[90%]'>
             <div className='flex  flex-row gap-[30px] lg:gap-[60px]'>
                 <div className={` flex-col flex-[30px] hidden md:flex w-full md:w-[50%]`}>
                     <SongFilter isTopTrack={isTopTrack} setIsTopTrack={setIsTopTrack} searchValue={searchValue} onSearchChange={handleSearchChange} />
                     <SongList songs={filteredSongs} currentSong={currentSong} onSongSelect={handleMusicSelection} />
                 </div>
-                <MusicPlayer
-                    handleForward={handleForward}
-                    handleBackward={handleBackward}
-                    currentSong={currentSong}
-                    setCurrentSong={setCurrentSong}
-                    handleModal={handleModalToggle}
-                />
+                {currentSong.song?.name &&
+                    <MusicPlayer
+                        handleForward={handleForward}
+                        handleBackward={handleBackward}
+                        currentSong={currentSong}
+                        setCurrentSong={setCurrentSong}
+                        handleModal={handleModalToggle}
+                    />}
             </div>
 
             {isModalOpen && (

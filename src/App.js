@@ -3,7 +3,7 @@ import SongAlbum from "./components/SongAlbum";
 
 function App() {
   return (
-    <div className="flex flex-col md:flex-row md:gap-[30px] lg:gap-[60px] p-[32px]  h-full">
+    <div className="flex flex-col lg:flex-row md:gap-[30px] lg:gap-[60px] p-[32px]  h-full">
       <Logo />
       <SongAlbum />
     </div>

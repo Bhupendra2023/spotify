@@ -14,6 +14,7 @@ const MusicPlayer = ({ setCurrentSong, currentSong, handleModal, handleBackward,
             audioRef.current.play();
             setIsPlaying(true);
             setCurrentSong({ ...currentSong, willPlay: false });
+            document.body.style.background = `linear-gradient(to right, ${currentSong.song.accent}, #000000)`;
         }
     }, [currentSong, setCurrentSong]);
 
@@ -28,6 +29,8 @@ const MusicPlayer = ({ setCurrentSong, currentSong, handleModal, handleBackward,
 
     const handleTimeUpdate = () => {
         setCurrentTime(audioRef.current.currentTime);
+        if (audioRef.current.currentTime === duration)
+            setIsPlaying(false)
     };
 
     const handleSeek = (e) => {
@@ -55,18 +58,18 @@ const MusicPlayer = ({ setCurrentSong, currentSong, handleModal, handleBackward,
     const currentPercentage = (currentTime / duration) * 100;
 
     return (
-        <div className="w-full block md:w-[50%] mt-[3.6rem] md:mr-[40px] lg:mr-[70px] xl:mr-[100px]">
-            <h2 className="text-white text-left font-bold font-inter text-[32px] leading-[36px]">
+        <div className="w-full block md:w-[50%] mt-[2rem] md:mt-[2rem] lg:mt-[3.6rem]  lg:mr-[50px] xl:mr-[80px]">
+            <h2 className="text-white text-left font-bold font-inter  text-2xl md:text-[32px] leading-[36px]">
                 {currentSong.song?.name}
             </h2>
-            <h3 className="font-inter text-left text-base mt-2 leading-[24px] text-[#A29F9A]">
+            <h3 className="font-inter text-left text-sm md:text-base lg:mt-2 leading-[24px] text-[#A29F9A]">
                 {currentSong.song?.artist}
             </h3>
-            <div className="mt-8 w-full">
+            <div className="mt-4 lg:mt-8 w-full">
                 <div className="sm:flex-col sm:flex sm:items-center sm:justify-center">
                     <img
                         alt={currentSong.song.cover}
-                        className="h-[400px] md:h-[400px] xl:h-[480px] w-full mb-[24px] rounded-[8px]"
+                        className="h-[300px] md:h-[400px] xl:h-[400px] w-full mb-[24px] rounded-[8px]"
                         src={`https://cms.samespace.com/assets/${currentSong.song.cover}`}
                     />
                     <audio
@@ -94,7 +97,7 @@ const MusicPlayer = ({ setCurrentSong, currentSong, handleModal, handleBackward,
                         <span>{formatTime(duration)}</span>
                     </div>
                 </div>
-                <div className="mt-[32px] flex items-center justify-between">
+                <div className="mt-6 flex items-center justify-between">
                     <button
                         onClick={() => handleModal(true)}
                         className="h-[48px] w-[48px] active:scale-[0.98] visible md:invisible bg-[rgba(255,255,255,10%)] rounded-full flex justify-center items-center"

@@ -10,6 +10,7 @@ const SongList = ({ songs, currentSong, onSongSelect, isModalView = false }) => 
                     song={song}
                     isSelected={song.accent === currentSong.song.accent}
                     onClick={() => onSongSelect(song, index)}
+                    delay={index * 100}
                 />
             ))}
         </ul>
